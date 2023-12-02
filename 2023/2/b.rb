@@ -2,8 +2,8 @@ eval File.read 'a.rb'
 
 class Game
   def minimum_counts
-    rounds.flat_map(&:counts).group_by(&:color).transform_values do |counts|
-      counts.map(&:number).max
+    counts.group_by(&:color).transform_values do |colored_counts|
+      colored_counts.map(&:number).max
     end
   end
 
@@ -12,4 +12,4 @@ class Game
   end
 end
 
-puts Input.games.sum &:power
+puts Input.games.sum(&:power)

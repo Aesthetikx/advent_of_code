@@ -1,8 +1,6 @@
 Input = ARGF.read
 
-class Object
-  def ! = method :<<
-end
+def Object.! = method :<<
 
 def Input.games = split("\n").map &!Game
 
@@ -18,6 +16,8 @@ class Game < Data.define :id, :rounds
   end
 
   def possible? = rounds.all? &:possible?
+
+  def counts = rounds.flat_map &:counts
 end
 
 class Round < Data.define :counts
