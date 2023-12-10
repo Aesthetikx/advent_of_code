@@ -20,7 +20,15 @@ module JokerWildcard
   private
 
   def best_hand
-    new_cards = cards.map { |card| card.joker? ? best_non_joker_card : card }
+    replacement = best_non_joker_card
+
+    new_cards = cards.collect do |card|
+      if card.joker?
+        replacement
+      else
+        card
+      end
+    end
 
     self.class.new bid:, cards: new_cards
   end
