@@ -5,28 +5,30 @@ class Array
   alias right last
 end
 
-sequence = Input.gets.chomp.chars.cycle
+Sequence = Input.gets.chomp.chars
 
 Input.gets # Consume the blank line
 
-network = {}
+Network = {}
 
 Input.readlines.each do |line|
   line =~ /(\w\w\w) = \((\w\w\w), (\w\w\w)\)/
 
   node, left, right = $1, $2, $3
 
-  network[node] = [left, right]
+  Network[node] = [left, right]
 end
 
 steps = 0
 
 position = 'AAA'
 
-until position == 'ZZZ'
-  node = network[position]
+directions = Sequence.cycle
 
-  position = case sequence.next
+until position == 'ZZZ'
+  node = Network[position]
+
+  position = case directions.next
              when 'L' then node.left
              when 'R' then node.right
              end
@@ -34,4 +36,6 @@ until position == 'ZZZ'
   steps += 1
 end
 
-puts steps
+$answer = steps
+
+at_exit { puts $answer }
